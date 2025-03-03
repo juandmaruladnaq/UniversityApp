@@ -10,16 +10,17 @@ export class EstudianteService {
   
   async findAll() {
     return this.prisma.estudiante.findMany({
-      include: { matriculas: true },
+      include: { Matricula: true }, 
     });
   }
-
+  
   async findOne(id: number) {
     return this.prisma.estudiante.findUnique({
       where: { id },
-      include: { matriculas: true },
+      include: { Matricula: true }, 
     });
   }
+  
 
   async create(nombre: string, fechaNacimiento: Date) {
     return this.prisma.estudiante.create({
