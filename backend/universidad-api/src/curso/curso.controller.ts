@@ -19,11 +19,10 @@ export class CursoController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  create(@Body() body: CreateCursoDto) {
-    return this.cursoService.create(body.nombre, body.descripcion ?? "Null", body.profesorId);
-
-  }
+@UsePipes(new ValidationPipe({ whitelist: true }))
+create(@Body() body: CreateCursoDto) {
+  return this.cursoService.create(body.nombre, body.descripcion ?? null, body.profesorId); // 👈 Ahora usa `null` en lugar de `"Null"`
+}
 
   @Put(':id')
   update(@Param('id') id: string, @Body() body: UpdateCursoDto) {

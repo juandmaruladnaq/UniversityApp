@@ -33,14 +33,25 @@ export class MatriculaService {
 
 
   async update(id: number, data: { fecha?: string; calificacion?: number }) {
+    // 1️⃣ Verificar si la matrícula existe antes de actualizar
+    const matriculaExistente = await this.prisma.matricula.findUnique({
+      where: { id },
+    });
+  
+    if (!matriculaExistente) {
+      throw new Error(`La matrícula con ID ${id} no existe.`);
+    }
+  
+    // 2️⃣ Si existe, proceder con la actualización
     return this.prisma.matricula.update({
       where: { id },
       data: {
         ...data,
-        fecha: data.fecha ? new Date(data.fecha) : undefined,
+        fecha: data.fecha ? new Date(data.fecha) : undefined, // Convertir fecha solo si existe
       },
     });
   }
+  
 
 
   async delete(id: number) {

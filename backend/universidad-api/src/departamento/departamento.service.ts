@@ -11,9 +11,31 @@ export class DepartamentoService {
     });
   }
 
+  
+  async findOne(id: number) {
+    return this.prisma.departamento.findUnique({
+      where: { id },
+      include: { profesores: true },
+    });
+  }
+
   async create(nombre: string) {
     return this.prisma.departamento.create({
       data: { nombre },
+    });
+  }
+
+  
+  async update(id: number, nombre: string) {
+    return this.prisma.departamento.update({
+      where: { id },
+      data: { nombre },
+    });
+  }
+
+  async delete(id: number) {
+    return this.prisma.departamento.delete({
+      where: { id },
     });
   }
 }

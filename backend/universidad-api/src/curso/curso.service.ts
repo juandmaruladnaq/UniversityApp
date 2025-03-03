@@ -21,7 +21,7 @@ export class CursoService {
   }
 
  
-  async create(nombre: string, descripcion: string, profesorId: number) {
+  async create(nombre: string, descripcion: string | null, profesorId: number) {
     return this.prisma.curso.create({
       data: { nombre, descripcion, profesorId },
     });
