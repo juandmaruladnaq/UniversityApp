@@ -9,6 +9,7 @@ import { CoursesComponent as StudentCoursesComponent } from './student/courses/c
 import { EnrollComponent } from './student/enroll/enroll.component';
 import { MyCoursesComponent } from './professor/my-courses/my-courses.component';
 import { EvaluationsComponent } from './professor/evaluations/evaluations.component';
+import { DepartmentComponent } from './admin/department/department.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -21,5 +22,6 @@ export const routes: Routes = [
     { path: 'student/enroll', component: EnrollComponent },
     { path: 'professor/my-courses', component: MyCoursesComponent },
     { path: 'professor/evaluations', component: EvaluationsComponent },
+    {path: 'admin/departments', component: DepartmentComponent },
     { path: '**', redirectTo: '' },
   ];
