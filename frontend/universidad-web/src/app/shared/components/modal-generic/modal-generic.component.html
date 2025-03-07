@@ -1,0 +1,29 @@
+<div class="modal fade show d-block" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header d-flex justify-content-between">
+                    <h4 class="modal-title">{{ titleName }}</h4>
+                    <button type="button" class="close" (click)="closeModal()">
+                        <a class="delete"><i class="fa-solid fa-xmark"></i></a>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @for(header of headersTable; track header){ @if(header!="id"){
+                        <label>{{ header }}</label>
+                        <input type="text" class="form-control" [(ngModel)]="newEntity[header]" [name]="header" required
+                            ngbAutofocus />
+                        } }
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-around">
+                    <button type="button" class="btn btn-default btn-danger" (click)="closeModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-info btnBorder" (click)="submit()">{{ value }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

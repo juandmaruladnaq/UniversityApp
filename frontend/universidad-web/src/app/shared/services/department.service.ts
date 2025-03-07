@@ -25,7 +25,8 @@ export class DepartmentService {
   }
   
   updateDepartment(id: number,department: Partial<Department>):Observable<Department>{
-    return this.http.patch<Department>(`${this.apiUrl}/${id}`,department);
+    console.log("📌 Enviando solicitud PUT al backend:", id, department);
+    return this.http.put<Department>(`${this.apiUrl}/${id}`, department);
   }
   
   deleteDepartment(id: number): Observable<void>{

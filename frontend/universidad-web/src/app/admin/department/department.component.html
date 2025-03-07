@@ -1,14 +1,9 @@
-<h2>Lista de Estudiantes</h2>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Fecha de Nacimiento</th>
-  </tr>
-  @for(os of departments; track os.id){ 
-  <tr>
-    <td>{{ os.nombre }}</td>
-    <td>{{ os.id }}</td>
-  </tr>
-}
-</table>
+<app-crud-template 
+  [title]="'Manage departments'" 
+  [headersTable]="headersTable" 
+  [data]="departments" 
+  [titleName]="'department'"
+  (entityCreated)="createDepartment($event)"
+  (entityDeleted)="deleteDepartment($event)"
+  (entityUpdated)="updateDepartment($event)"> 
+</app-crud-template>
