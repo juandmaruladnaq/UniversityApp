@@ -38,7 +38,6 @@ export class CrudTemplateComponent {
     modalRef.componentInstance.newEntity = entity ? { ...entity } : {}; 
   
     modalRef.componentInstance.createEntity.subscribe((updatedEntity: any) => {
-      console.log("📌 Datos recibidos en submit():", updatedEntity);
       if (action === 'edit') {
         this.entityUpdated.emit(updatedEntity); 
       } else {

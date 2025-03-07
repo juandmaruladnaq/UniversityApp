@@ -48,7 +48,6 @@ export class DepartmentComponent {
     this.departmentService
      .updateDepartment(department.id!, department)
      .subscribe(() => this.getDepartments());
-     console.log("📌 Actualización exitosa en la BD"); 
 
   }
 }
