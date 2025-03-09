@@ -33,6 +33,7 @@ export class ModalGenericComponent {
   }
 
   submit() {
+    console.log("entrado a edit: ",this.newEntity);
     this.createEntity.emit(this.newEntity); 
     this.activeModal.close();
   }

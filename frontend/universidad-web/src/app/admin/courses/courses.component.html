@@ -1,1 +1,9 @@
-<p>courses works!</p>
+<app-crud-template 
+  [title]="'Manage Courses'" 
+  [headersTable]="headersTable" 
+  [data]="courses" 
+  [titleName]="'course'"
+  (entityCreated)="createCourse($event)"
+  (entityDeleted)="deleteCourse($event)"
+  (entityUpdated)="updateCourse($event)"> 
+</app-crud-template>

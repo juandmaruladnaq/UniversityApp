@@ -7,7 +7,7 @@ import { Course } from '../models/Course.model';
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl =`${API_URL}/departamentos`
+  private apiUrl =`${API_URL}/cursos`
 
 
   constructor(private http: HttpClient) { }
@@ -23,8 +23,9 @@ export class CourseService {
   }
 
   updateCourse( id: number, course: Partial<Course>): Observable<Course> {
-    return this.http.patch<Course>(`${this.apiUrl}/${id}`,course);
+    return this.http.put<Course>(`${this.apiUrl}/${id}`,course);
   }
+
   deleteCourse(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

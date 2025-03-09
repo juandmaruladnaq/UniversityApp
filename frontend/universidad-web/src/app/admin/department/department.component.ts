@@ -48,6 +48,7 @@ export class DepartmentComponent {
     this.departmentService
      .updateDepartment(department.id!, department)
      .subscribe(() => this.getDepartments());
-
   }
+
+  
 }

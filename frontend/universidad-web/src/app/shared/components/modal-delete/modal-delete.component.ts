@@ -12,6 +12,7 @@ export class ModalDeleteComponent {
   @Input() titleName = '';
   @Output() confirmDelete = new EventEmitter<number>();
   @Input() entityIds: number[] = [];
+  @Input() id : number = 0;
 
   constructor(public activeModal: NgbActiveModal) {}
 
@@ -21,5 +22,15 @@ export class ModalDeleteComponent {
   }
   closeModal() {
     this.activeModal.close();
+  }
+
+  IdReturned(): number | number[]{
+    if(this.entityIds && this.entityIds.length > 0){
+      console.log("entre a array");
+      return this.entityIds;
+    }else{
+      console.log("entre a number");
+      return this.id;
+    }
   }
 }

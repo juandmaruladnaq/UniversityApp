@@ -7,10 +7,18 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
+            @if(typeof IdReturned()=== 'number'){ 
             <div class="modal-body">
-                <p>Are you sure you want to delete these {{ entityIds.length }} departments?</p>
+                <p>Are you sure you want to delete id: {{ IdReturned() }} {{titleName}}?</p>
                 <p class="text-warning"><small>This action cannot be undone.</small></p>
             </div>
+        }@else{
+            <div class="modal-body">
+                <p>you actually want to delete these {{ IdReturned() }} elements of {{titleName}}?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+            </div>
+
+        }
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
                 <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>

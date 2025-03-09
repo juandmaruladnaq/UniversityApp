@@ -8,7 +8,7 @@ import { Student } from '../models/Student.model';
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl =`${API_URL}/departamentos`
+  private apiUrl =`${API_URL}/estudiantes`
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +26,10 @@ export class StudentService {
     return this.http.post<Student>(this.apiUrl, student);
   }
 
-  updateDepartment(id: number,student: Partial<Student>):Observable<Student>{
-    return this.http.patch<Student>(`${this.apiUrl}/${id}`,student);
+  updateStudent(id: number,student: Partial<Student>):Observable<Student>{
+    console.log("id: ",id);
+    console.log("student: ", student);
+    return this.http.put<Student>(`${this.apiUrl}/${id}`,student);
   }
   
 
