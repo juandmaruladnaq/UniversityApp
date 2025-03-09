@@ -1,1 +1,9 @@
-<p>teachers works!</p>
+<app-crud-template 
+  [title]="'Manage Teachers'" 
+  [headersTable]="headersTable" 
+  [data]="teachers" 
+  [titleName]="'teacher'"
+  (entityCreated)="createTeacher($event)"
+  (entityDeleted)="deleteTeacher($event)"
+  (entityUpdated)="updateTeacher($event)"> 
+</app-crud-template>

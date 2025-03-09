@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalGenericComponent } from '../modal-generic/modal-generic.component';
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
+import { ModalViewComponent } from '../modal-view/modal-view.component';
+import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-crud-template',
@@ -16,6 +18,7 @@ export class CrudTemplateComponent {
   @Input() headersTable: string[] = [];
   @Input() data: any[] = [];
   @Input() titleName = '';
+  @Input()studentById:any;
 
   @Output() entityCreated = new EventEmitter<any>();
   @Output() entityDeleted = new EventEmitter<number>();
@@ -31,38 +34,53 @@ export class CrudTemplateComponent {
       backdrop: 'static',
       keyboard: false,
     });
-  
+
     modalRef.componentInstance.titleName = title;
     modalRef.componentInstance.value = action;
     modalRef.componentInstance.headersTable = this.headersTable;
-    modalRef.componentInstance.newEntity = entity ? { ...entity } : {}; 
-  
+    modalRef.componentInstance.newEntity = entity ? { ...entity } : {};
+
     modalRef.componentInstance.createEntity.subscribe((updatedEntity: any) => {
-      console.log("📌 Datos recibidos en submit():", updatedEntity);
       if (action === 'edit') {
-        this.entityUpdated.emit(updatedEntity); 
+        console.log("update entitity", updatedEntity);
+        this.entityUpdated.emit(updatedEntity);
       } else {
-        this.entityCreated.emit(updatedEntity); 
+        this.entityCreated.emit(updatedEntity);
       }
     });
   }
-  
 
-  openDeleteModal(entityIds: number[]) {
+  openDeleteModal(entityIds?: number[], id?: number) {
     const modalRef = this.modalService.open(ModalDeleteComponent, {
       centered: true,
     });
-    modalRef.componentInstance.titleName = 'Delete Departments';
+    modalRef.componentInstance.titleName = 'delete ' + this.titleName;
     modalRef.componentInstance.entityIds = entityIds;
+    modalRef.componentInstance.id = id;
 
-    modalRef.componentInstance.confirmDelete.subscribe(() => {
-      entityIds.forEach((id) => {
-        this.entityDeleted.emit(id);
+    if (entityIds && entityIds.length > 0) {
+      modalRef.componentInstance.confirmDelete.subscribe(() => {
+        entityIds.forEach((id) => {
+          this.entityDeleted.emit(id);
+        });
+        console.log('idis: ', entityIds);
+        this.selectedEntityIds = [];
       });
-
-      this.selectedEntityIds = [];
-    });
+    } else {
+      modalRef.componentInstance.confirmDelete.subscribe(() => {
+        console.log('id: ', id);
+        this.entityDeleted.emit(id);
+        this.selectedEntityIds = [];
+      });
+    }
   }
+
+  openViewModal(student: any) {
+    const modalRef = this.modalService.open(ModalViewComponent, { centered: true, size: 'lg' });
+    modalRef.componentInstance.titleName = this.titleName;
+    modalRef.componentInstance.entityData = student;
+  }
+  
 
   toggleSelection(entityId: number) {
     const index = this.selectedEntityIds.indexOf(entityId);

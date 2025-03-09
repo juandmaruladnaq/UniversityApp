@@ -25,8 +25,8 @@ export class TeacherService {
 
 
 
-  updateDepartment(id: number,teacher: Partial<Teacher>):Observable<Teacher>{
-    return this.http.patch<Teacher>(`${this.apiUrl}/${id}`,teacher);
+  updateTeacher(id: number,teacher: Partial<Teacher>):Observable<Teacher>{
+    return this.http.put<Teacher>(`${this.apiUrl}/${id}`,teacher);
   }
   
   deleteTeacher(id: number): Observable<void> {

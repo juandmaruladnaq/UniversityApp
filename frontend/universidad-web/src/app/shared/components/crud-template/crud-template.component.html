@@ -4,18 +4,19 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><b>{{title}}</b></h2>
+                        <h2>
+                            <b>{{ title }}</b>
+                        </h2>
                     </div>
                     <div class="col-sm-6">
-                        <button class="btn btn-success" (click)="openGenericModal('Add Department', 'add')">
-                            <i class="fa-solid fa-plus"></i> <span>Add New {{ titleName }}</span>
+                        <button class="btn btn-success" (click)="openGenericModal('Add {{titleName}}', 'add')">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add New {{ titleName }}</span>
                         </button>
                         <button class="btn btn-danger" (click)="openDeleteModal(selectedEntityIds)"
                             [disabled]="selectedEntityIds.length === 0">
                             <i class="fa-solid fa-trash"></i> <span>Delete</span>
                         </button>
-
-
                     </div>
                 </div>
             </div>
@@ -24,12 +25,13 @@
                     <tr>
                         <th>
                             <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
+                                <input type="checkbox" id="selectAll" />
                                 <label for="selectAll"></label>
                             </span>
                         </th>
                         @for(header of headersTable; track header) {
-                        <th>{{header}}</th>
+                        <th>{{ header }}</th>
+
                         }
                         <th>Actions</th>
                     </tr>
@@ -40,7 +42,8 @@
                         <td>
                             <span class="custom-checkbox">
                                 <input type="checkbox" [id]="'checkbox' + item.id"
-                                    [checked]="selectedEntityIds.includes(item.id)" (change)="toggleSelection(item.id)">
+                                    [checked]="selectedEntityIds.includes(item.id)"
+                                    (change)="toggleSelection(item.id)" />
                                 <label [for]="'checkbox' + item.id"></label>
                             </span>
                         </td>
@@ -48,19 +51,20 @@
                         <td>{{ item[header] }}</td>
                         }
                         <td class="d-flex justify-content-around gap-2">
-                            <button class="btn btn-sm" (click)="openGenericModal('Edit Department', 'edit', item)">
+                            <button class="btn btn-sm" (click)="openGenericModal('Edit {{titleName}}', 'edit', item)">
                                 <a class="edit"><i class="fa-solid fa-pen"></i></a>
-                              </button>
-                              
+                            </button>
 
-                            <button class="btn btn-sm " (click)="openDeleteModal(item.id)">
+                            <button class="btn btn-sm" (click)="openDeleteModal(selectedEntityIds, item.id)">
                                 <a class="delete"><i class="fa-solid fa-trash"></i></a>
+                            </button>
+                            <button class="btn btn-sm" (click)="openViewModal(item)" >
+                                <a class="view"><i class="fa-solid fa-eye"></i></a>
                             </button>
                         </td>
                     </tr>
                     }
                 </tbody>
-
             </table>
         </div>
     </div>

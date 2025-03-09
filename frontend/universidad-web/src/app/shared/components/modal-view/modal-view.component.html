@@ -1,0 +1,63 @@
+<div class="modal-body">
+  @if (entityData) {
+    <!-- Mostrar propiedades simples y objetos -->
+    @for (key of objectKeys(entityData); track key) {
+      @if (!isArray(key) && !isObject(entityData[key])) {
+        <div class="mb-2">
+          <strong>{{ key | titlecase }}:</strong> {{ entityData[key] }}
+        </div>
+      }
+      @if (isObject(entityData[key])) {
+        <div class="mb-2">
+          <strong>{{ key | titlecase }}:</strong>
+          @for (subKey of objectKeys(entityData[key]); track subKey) {
+            <div class="ms-3">
+              <strong> {{ subKey | titlecase }}</strong>: {{ entityData[key][subKey] }}
+            </div>
+          }
+        </div>
+      }
+    }
+
+    <!-- Mostrar arrays -->
+    @for (key of objectKeys(entityData); track key) {
+      @if (isArray(key)) {
+        <h5 class="mt-3">{{ key | titlecase }}</h5>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              @for (subKey of objectKeys(entityData[key][0]); track subKey) {
+                <th>{{ subKey | titlecase }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of entityData[key]; track item.id) {
+              <tr>
+                @for (subKey of objectKeys(item); track subKey) {
+                  <td>
+                    @if (isObject(item[subKey])) {
+                      <div class="d-flex flex-column">
+                        @for (nestedKey of objectKeys(item[subKey]); track nestedKey) {
+                          <span>{{ item[subKey][nestedKey] }}</span>
+                        }
+                      </div>
+                    } @else {
+                      {{ item[subKey] }}
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  }
+  <div class="flex justify-center mx-auto">
+    <button type="button" 
+            class="btn btn-outline-danger" 
+            (click)="closeModal()">
+      <i class="fas fa-times me-2"></i>Cerrar
+    </button>
+</div>
