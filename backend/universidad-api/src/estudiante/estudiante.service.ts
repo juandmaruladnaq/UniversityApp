@@ -28,12 +28,22 @@ export class EstudianteService {
     });
   }
 
-  async update(id: number, data: { nombre?: string; fechaNacimiento?: string }) {
+  async update(id: number, data: { nombre?: string; fechaNacimiento?: string; Matricula?: any[] }) {
     return this.prisma.estudiante.update({
       where: { id },
       data: {
         ...data,
-        fechaNacimiento: data.fechaNacimiento ? new Date(data.fechaNacimiento) : undefined, // ✅ Conversión aquí
+        fechaNacimiento: data.fechaNacimiento ? new Date(data.fechaNacimiento) : undefined,
+  
+        Matricula: data.Matricula
+          ? {
+              upsert: data.Matricula.map((matricula) => ({
+                where: { id: matricula.id }, 
+                update: { ...matricula }, 
+                create: { ...matricula }, 
+              })),
+            }
+          : undefined,
       },
     });
   }
