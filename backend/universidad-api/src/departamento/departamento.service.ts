@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -6,35 +6,55 @@ export class DepartamentoService {
   constructor(private prisma: PrismaService) {}
 
   async findAll() {
-    return this.prisma.departamento.findMany({
+    return await this.prisma.departamento.findMany({
       include: { profesores: true },
     });
   }
 
-  
   async findOne(id: number) {
-    return this.prisma.departamento.findUnique({
+    const departamento = await this.prisma.departamento.findUnique({
       where: { id },
       include: { profesores: true },
     });
+
+    if (!departamento) {
+      throw new NotFoundException(`El departamento con ID ${id} no existe.`);
+    }
+
+    return departamento;
   }
 
   async create(nombre: string) {
-    return this.prisma.departamento.create({
+    return await this.prisma.departamento.create({
       data: { nombre },
     });
   }
 
-  
   async update(id: number, nombre: string) {
-    return this.prisma.departamento.update({
+    const departamentoExistente = await this.prisma.departamento.findUnique({
+      where: { id },
+    });
+
+    if (!departamentoExistente) {
+      throw new NotFoundException(`El departamento con ID ${id} no existe.`);
+    }
+
+    return await this.prisma.departamento.update({
       where: { id },
       data: { nombre },
     });
   }
 
   async delete(id: number) {
-    return this.prisma.departamento.delete({
+    const departamentoExistente = await this.prisma.departamento.findUnique({
+      where: { id },
+    });
+
+    if (!departamentoExistente) {
+      throw new NotFoundException(`El departamento con ID ${id} no existe.`);
+    }
+
+    return await this.prisma.departamento.delete({
       where: { id },
     });
   }

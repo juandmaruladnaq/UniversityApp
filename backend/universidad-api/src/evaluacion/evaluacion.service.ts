@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -6,26 +6,20 @@ export class EvaluacionService {
   constructor(private prisma: PrismaService) {}
 
   async findAll() {
-    return this.prisma.evaluacion.findMany({
-      include: { estudiante: true, curso: true }, 
-    });
+    return this.prisma.evaluacion.findMany({ include: { estudiante: true, curso: true } });
   }
-  
+
   async findOne(id: number) {
-    return this.prisma.evaluacion.findUnique({
-      where: { id },
-      include: { estudiante: true, curso: true },
-    });
+    return this.prisma.evaluacion.findUnique({ where: { id }, include: { estudiante: true, curso: true } });
   }
-  
 
   async create(estudianteId: number, cursoId: number, nota: number, fecha: string) {
     return this.prisma.evaluacion.create({
-      data: { 
-        estudianteId, 
-        cursoId, 
+      data: {
+        estudianteId,
+        cursoId,
         nota,
-        fecha: new Date(fecha), 
+        fecha: new Date(fecha),
       },
     });
   }
@@ -41,8 +35,6 @@ export class EvaluacionService {
   }
 
   async delete(id: number) {
-    return this.prisma.evaluacion.delete({
-      where: { id },
-    });
+    return this.prisma.evaluacion.delete({ where: { id } });
   }
 }
