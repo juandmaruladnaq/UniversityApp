@@ -1,8 +1,13 @@
 import { PrismaClient } from '@prisma/client';
+<<<<<<< HEAD
+=======
+import * as bcrypt from 'bcrypt';
+>>>>>>> main
 
 const prisma = new PrismaClient();
 
 async function main() {
+<<<<<<< HEAD
   console.log('Seeding database...');
 
   // Poblar la tabla Departamento
@@ -257,6 +262,27 @@ async function main() {
 main()
   .catch((error) => {
     console.error(error);
+=======
+  const hashedPassword = await bcrypt.hash('admin123', 10); 
+
+  const admin = await prisma.usuario.upsert({
+    where: { email: 'admin@example.com' },
+    update: {},
+    create: {
+      nombre: 'Administrador',
+      email: 'admin@example.com',
+      password: hashedPassword, 
+      role: 'admin',
+    },
+  });
+
+  console.log('✅ Usuario administrador creado:', admin);
+}
+
+main()
+  .catch((e) => {
+    console.error('❌ Error al ejecutar el seed:', e);
+>>>>>>> main
     process.exit(1);
   })
   .finally(async () => {

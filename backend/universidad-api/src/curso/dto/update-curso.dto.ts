@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsOptional } from 'class-validator';
+import { IsString, IsInt, IsOptional, IsArray } from 'class-validator';
 
 export class UpdateCursoDto {
   @IsOptional()
@@ -12,4 +12,9 @@ export class UpdateCursoDto {
   @IsOptional()
   @IsInt()
   profesorId?: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsInt({ each: true })
+  prerrequisitos?: number[];
 }
