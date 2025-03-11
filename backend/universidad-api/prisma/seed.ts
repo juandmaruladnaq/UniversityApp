@@ -1,13 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-<<<<<<< HEAD
-=======
 import * as bcrypt from 'bcrypt';
->>>>>>> main
 
 const prisma = new PrismaClient();
 
 async function main() {
-<<<<<<< HEAD
   console.log('Seeding database...');
 
   // Poblar la tabla Departamento
@@ -31,83 +27,209 @@ async function main() {
     ],
   });
 
-  // Poblar la tabla Profesor
-  const profesores = await prisma.profesor.createMany({
+  // Poblar la tabla Usuario (Profesor)
+  const profesores = await prisma.usuario.createMany({
     data: [
       {
         nombre: 'Dr. Juan Pérez',
-        fechaContratacion: new Date(),
+        email: 'juan.perez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 1,
       },
       {
         nombre: 'Dra. Ana Gómez',
-        fechaContratacion: new Date(),
+        email: 'ana.gomez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 2,
       },
       {
         nombre: 'Dr. Carlos Ramírez',
-        fechaContratacion: new Date(),
+        email: 'carlos.ramirez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 3,
       },
       {
         nombre: 'Dra. María López',
-        fechaContratacion: new Date(),
+        email: 'maria.lopez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 4,
       },
       {
         nombre: 'Dr. José García',
-        fechaContratacion: new Date(),
+        email: 'jose.garcia@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 5,
       },
       {
         nombre: 'Dra. Sofía Rodríguez',
-        fechaContratacion: new Date(),
+        email: 'sofia.rodriguez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 6,
       },
       {
         nombre: 'Dr. Luis Hernández',
-        fechaContratacion: new Date(),
+        email: 'luis.hernandez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 7,
       },
       {
         nombre: 'Dra. Laura Martínez',
-        fechaContratacion: new Date(),
+        email: 'laura.martinez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 8,
       },
       {
         nombre: 'Dr. Antonio Díaz',
-        fechaContratacion: new Date(),
+        email: 'antonio.diaz@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 9,
       },
       {
         nombre: 'Dra. Elena Sánchez',
-        fechaContratacion: new Date(),
+        email: 'elena.sanchez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 10,
       },
       {
         nombre: 'Dr. Francisco Torres',
-        fechaContratacion: new Date(),
+        email: 'francisco.torres@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 11,
       },
       {
         nombre: 'Dra. Cristina Navarro',
-        fechaContratacion: new Date(),
+        email: 'cristina.navarro@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 12,
       },
       {
         nombre: 'Dr. Gabriel González',
-        fechaContratacion: new Date(),
+        email: 'gabriel.gonzalez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 13,
       },
       {
         nombre: 'Dra. Lucía Moreno',
-        fechaContratacion: new Date(),
+        email: 'lucia.moreno@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 14,
       },
       {
         nombre: 'Dr. Daniel Fernández',
-        fechaContratacion: new Date(),
+        email: 'daniel.fernandez@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'profesor',
         departamentoId: 15,
+      },
+    ],
+  });
+
+  // Poblar la tabla Usuario (Estudiante)
+  const estudiantes = await prisma.usuario.createMany({
+    data: [
+      {
+        nombre: 'Carlos Ramírez',
+        email: 'carlos.ramirez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'María López',
+        email: 'maria.lopez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Juan González',
+        email: 'juan.gonzalez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Sofía Rodríguez',
+        email: 'sofia.rodriguez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Luis Hernández',
+        email: 'luis.hernandez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Laura Martínez',
+        email: 'laura.martinez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Antonio Díaz',
+        email: 'antonio.diaz.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Elena Sánchez',
+        email: 'elena.sanchez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Francisco Torres',
+        email: 'francisco.torres.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Cristina Navarro',
+        email: 'cristina.navarro.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Gabriel González',
+        email: 'gabriel.gonzalez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Lucía Moreno',
+        email: 'lucia.moreno.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Daniel Fernández',
+        email: 'daniel.fernandez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'Ana García',
+        email: 'ana.garcia.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
+      },
+      {
+        nombre: 'José Gómez',
+        email: 'jose.gomez.estudiante@example.com',
+        password: await bcrypt.hash('password', 10),
+        role: 'estudiante',
       },
     ],
   });
@@ -193,28 +315,7 @@ async function main() {
     ],
   });
 
-  // Poblar la tabla Estudiante
-  const estudiantes = await prisma.estudiante.createMany({
-    data: [
-      { nombre: 'Carlos Ramírez', fechaNacimiento: new Date('2000-05-20') },
-      { nombre: 'María López', fechaNacimiento: new Date('2002-09-15') },
-      { nombre: 'Juan González', fechaNacimiento: new Date('2001-02-10') },
-      { nombre: 'Sofía Rodríguez', fechaNacimiento: new Date('2003-07-25') },
-      { nombre: 'Luis Hernández', fechaNacimiento: new Date('2000-11-05') },
-      { nombre: 'Laura Martínez', fechaNacimiento: new Date('2002-04-20') },
-      { nombre: 'Antonio Díaz', fechaNacimiento: new Date('2001-08-15') },
-      { nombre: 'Elena Sánchez', fechaNacimiento: new Date('2003-01-10') },
-      { nombre: 'Francisco Torres', fechaNacimiento: new Date('2000-06-25') },
-      { nombre: 'Cristina Navarro', fechaNacimiento: new Date('2002-03-05') },
-      { nombre: 'Gabriel González', fechaNacimiento: new Date('2001-09-20') },
-      { nombre: 'Lucía Moreno', fechaNacimiento: new Date('2003-05-15') },
-      { nombre: 'Daniel Fernández', fechaNacimiento: new Date('2000-10-10') },
-      { nombre: 'Ana García', fechaNacimiento: new Date('2002-07-25') },
-      { nombre: 'José Gómez', fechaNacimiento: new Date('2001-04-20') },
-    ],
-  });
-
-  // Poblar la tabla Matrícula
+  // Poblar la tabla Matricula
   const matriculas = await prisma.matricula.createMany({
     data: [
       { estudianteId: 1, cursoId: 1, fecha: new Date(), calificacion: 4.5 },
@@ -256,35 +357,23 @@ async function main() {
     ],
   });
 
-  console.log('Seeding completed!');
-}
-
-main()
-  .catch((error) => {
-    console.error(error);
-=======
-  const hashedPassword = await bcrypt.hash('admin123', 10); 
-
+  // Crear usuario administrador
+  const hashedPassword = await bcrypt.hash('admin123', 10);
   const admin = await prisma.usuario.upsert({
     where: { email: 'admin@example.com' },
     update: {},
     create: {
       nombre: 'Administrador',
       email: 'admin@example.com',
-      password: hashedPassword, 
+      password: hashedPassword,
       role: 'admin',
     },
   });
 
+  console.log('Seeding completed!');
   console.log('✅ Usuario administrador creado:', admin);
 }
 
-main()
-  .catch((e) => {
-    console.error('❌ Error al ejecutar el seed:', e);
->>>>>>> main
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main().catch((error) => {
+  console.error(' Error al ejecutar el seed:', error);
+});

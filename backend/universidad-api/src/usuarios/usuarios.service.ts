@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException,BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 
@@ -53,4 +53,40 @@ export class UsuariosService {
     }
     return this.prisma.usuario.delete({ where: { id } });
   }
+
+  async getCursosDelEstudiante(estudianteId: number) {
+    return this.prisma.matricula.findMany({
+      where: { estudianteId },
+      include: { curso: true },
+    });
+  }
+
+  async registerCourse(usuarioId: number, cursoId: number) {
+    // Verificar si el usuario es un estudiante
+    const usuario = await this.prisma.usuario.findUnique({
+      where: { id: usuarioId },
+    });
+
+    if (!usuario || usuario.role !== 'estudiante') {
+      throw new BadRequestException('Solo los estudiantes pueden inscribirse en cursos.');
+    }
+
+    // Verificar si ya está inscrito
+    const existe = await this.prisma.matricula.findFirst({
+      where: { estudianteId: usuarioId, cursoId },
+    });
+
+    if (existe) {
+      throw new BadRequestException('El estudiante ya está inscrito en este curso.');
+    }
+
+    return this.prisma.matricula.create({
+      data: {
+        estudianteId: usuarioId,
+        cursoId,
+        fecha: new Date(),
+      },
+    });
+  }
 }
+

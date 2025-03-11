@@ -1,3 +1,4 @@
+/*
 import {
   Controller,
   Get,
@@ -47,3 +48,4 @@ export class EstudianteController {
     return this.estudianteService.delete(Number(id));
   }
 }
+*/

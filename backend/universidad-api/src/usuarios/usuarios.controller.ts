@@ -78,6 +78,18 @@ export class UsuariosController {
     }
     return this.usuariosService.delete(Number(id));
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id/cursos')
+  async getCursosDelEstudiante(@Param('id') id: string) {
+    return this.usuariosService.getCursosDelEstudiante(parseInt(id));
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('inscribir')
+  async registerCourse(@Body() body: { usuarioId: number; cursoId: number }) {
+    return this.usuariosService.registerCourse(body.usuarioId, body.cursoId);
+  }
 }
 
   
