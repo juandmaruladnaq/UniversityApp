@@ -19,6 +19,7 @@ export class CrudTemplateComponent {
   @Input() data: any[] = [];
   @Input() titleName = '';
   @Input()studentById:any;
+  @Input() crud: boolean = false ;
 
   @Output() entityCreated = new EventEmitter<any>();
   @Output() entityDeleted = new EventEmitter<number>();
@@ -78,6 +79,7 @@ export class CrudTemplateComponent {
   openViewModal(student: any) {
     const modalRef = this.modalService.open(ModalViewComponent, { centered: true, size: 'lg' });
     modalRef.componentInstance.titleName = this.titleName;
+    console.log("estudiante entrante: ",student)
     modalRef.componentInstance.entityData = student;
   }
   

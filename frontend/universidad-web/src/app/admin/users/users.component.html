@@ -1,0 +1,10 @@
+<app-crud-template 
+  [title]="'Manage User'" 
+  [headersTable]="headersTable" 
+  [data]="users" 
+  [titleName]="'user'"
+  [crud]="true"
+  (entityCreated)="createUser($event)"
+  (entityDeleted)="deleteUser($event)"
+  (entityUpdated)="updateUser($event)"> 
+</app-crud-template>

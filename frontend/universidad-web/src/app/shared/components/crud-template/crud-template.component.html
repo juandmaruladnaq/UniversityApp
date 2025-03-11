@@ -8,6 +8,7 @@
                             <b>{{ title }}</b>
                         </h2>
                     </div>
+                    @if(crud){
                     <div class="col-sm-6">
                         <button class="btn btn-success" (click)="openGenericModal('Add {{titleName}}', 'add')">
                             <i class="fa-solid fa-plus"></i>
@@ -18,6 +19,7 @@
                             <i class="fa-solid fa-trash"></i> <span>Delete</span>
                         </button>
                     </div>
+                }
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -30,10 +32,13 @@
                             </span>
                         </th>
                         @for(header of headersTable; track header) {
+                    @if(header != "password") {
                         <th>{{ header }}</th>
-
+                            }
                         }
-                        <th>Actions</th>
+                        @if (crud) { 
+                            <th>Actions</th>  <!-- Solo muestra esta columna si crud es true -->
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -48,8 +53,12 @@
                             </span>
                         </td>
                         @for (header of headersTable; track header) {
+                            @if(header != "password") {
+
                         <td>{{ item[header] }}</td>
+                            }
                         }
+                        @if(crud){ 
                         <td class="d-flex justify-content-around gap-2">
                             <button class="btn btn-sm" (click)="openGenericModal('Edit {{titleName}}', 'edit', item)">
                                 <a class="edit"><i class="fa-solid fa-pen"></i></a>
@@ -62,6 +71,7 @@
                                 <a class="view"><i class="fa-solid fa-eye"></i></a>
                             </button>
                         </td>
+                    }
                     </tr>
                     }
                 </tbody>

@@ -12,6 +12,7 @@ import { CrudTemplateComponent } from '../../shared/components/crud-template/cru
 export class CoursesComponent {
   courses : Course[] =[];
   headersTable: string[] = ['id', 'nombre','descripcion','profesorId'];
+  crud : boolean = true;
 
   constructor(private courseService: CourseService) {}
 

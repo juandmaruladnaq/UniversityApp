@@ -3,6 +3,7 @@
   [headersTable]="headersTable" 
   [data]="departments" 
   [titleName]="'department'"
+  [crud]="true"
   (entityCreated)="createDepartment($event)"
   (entityDeleted)="deleteDepartment($event)"
   (entityUpdated)="updateDepartment($event)"> 

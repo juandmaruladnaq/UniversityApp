@@ -1,2 +1,10 @@
+<div class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-700 to-white clip-path-custom z-0"></div>
 
-<router-outlet />
+  <div class="relative z-10 m-2.5">
+
+  <app-navbar [links]="navbarLinks"></app-navbar>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

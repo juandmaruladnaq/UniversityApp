@@ -1,1 +1,17 @@
-<p>courses works</p>
+<div class="container">
+    <h2>Mis Cursos</h2>
+  
+    @if (cursos.length > 0) {
+      <ul class="list-group">
+        @for (matricula of cursos; track matricula.id) {
+          <li class="list-group-item">
+            <h5>{{ matricula.curso.nombre }}</h5>
+            <p>{{ matricula.curso.descripcion }}</p>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>No estás inscrito en ningún curso.</p>
+    }
+  </div>
+  

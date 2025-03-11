@@ -10,7 +10,8 @@ import { TeacherService } from '../../shared/services/teacher.service';
 })
 export class TeachersComponent {
   teachers: Teacher[] = [];
-  headersTable: string[] = ['id', 'nombre', 'fechaContratacion','departamentoId'];
+  headersTable: string[] = ['id', 'nombre', 'email','role','departamentoId'];
+  crud : boolean = false;
   constructor(private teacherService: TeacherService) {  }
 
   ngOnInit(): void {

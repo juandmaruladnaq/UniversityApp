@@ -11,8 +11,12 @@ import { CrudTemplateComponent } from '../../shared/components/crud-template/cru
 })
 export class StudentsComponent {
   students: Student[] = [];
-  headersTable: string[] = ['id', 'nombre', 'fechaNacimiento'];
-  constructor(private studentService: StudentService) {} 
+  headersTable: string[] = ['id', 'nombre', 'email','role'];
+  crud : boolean = false;
+  constructor(private studentService: StudentService) {
+    console.log('Crud en TeachersComponent:', this.crud);  
+
+  } 
 
   ngOnInit(): void {
     this.getStudents();

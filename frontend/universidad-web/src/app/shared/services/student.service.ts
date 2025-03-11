@@ -8,7 +8,7 @@ import { Student } from '../models/Student.model';
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl =`${API_URL}/estudiantes`
+  private apiUrl =`${API_URL}/usuarios/estudiantes`
 
   constructor(private http: HttpClient) { }
 

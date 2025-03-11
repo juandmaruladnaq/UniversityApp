@@ -3,6 +3,7 @@
   [headersTable]="headersTable" 
   [data]="courses" 
   [titleName]="'course'"
+  [crud]="true"
   (entityCreated)="createCourse($event)"
   (entityDeleted)="deleteCourse($event)"
   (entityUpdated)="updateCourse($event)"> 
