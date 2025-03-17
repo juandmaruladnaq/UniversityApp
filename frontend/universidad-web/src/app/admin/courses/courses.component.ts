@@ -27,10 +27,11 @@ getCourses(): void {
   }
 
   createCourse(entity:any): void {
+    console.log(typeof(entity.profesorId), "tipo de dato id teacher");
     const course: Course = {
       nombre: entity.nombre,
       descripcion: entity.descripcion,
-      profesorId :entity.profesorId,
+      profesorId :parseInt( entity.profesorId),
     };
     this.courseService
       .createCourse(course)

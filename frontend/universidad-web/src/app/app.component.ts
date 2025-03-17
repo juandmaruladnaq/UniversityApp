@@ -30,6 +30,7 @@ export class AppComponent {
         { title: 'Estudiantes', path: '/admin/students' },
         { title: 'Departamentos', path: '/admin/departments' },
         {title: 'Users', path:'/admin/users' },
+        {title: 'ClassSchedules', path:'/admin/class-schedule' },
         { title: 'Perfil', path: '/profile' }
       ];
     } else if (this.userRole === 'profesor') {

@@ -11,8 +11,9 @@ import { MyCoursesComponent } from './professor/my-courses/my-courses.component'
 import { EvaluationsComponent } from './professor/evaluations/evaluations.component';
 import { DepartmentComponent } from './admin/department/department.component';
 import { authGuard } from './shared/guards/auth.guard';
-import { ProfileComponent } from './auth/profile/profile/profile.component';
+import { ProfileComponent } from './shared/components/profile/profile.component';
 import { UsersComponent } from './admin/users/users.component';
+import { ClassScheduleComponent } from './admin/class-schedule/class-schedule.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'admin/teachers', component: TeachersComponent, canActivate: [authGuard], data: { roles: ['admin'] }},
   { path: 'admin/students', component: StudentsComponent, canActivate: [authGuard], data: { roles: ['admin'] }},
   { path: 'admin/users', component: UsersComponent, canActivate: [authGuard], data: { roles: ['admin'] }},
+  { path: 'admin/class-schedule', component: ClassScheduleComponent, canActivate: [authGuard], data: { roles: ['admin'] }},
   { path: 'student/courses', component: StudentCoursesComponent, canActivate: [authGuard], data: { roles: ['estudiante'] }},
   { path: 'student/enroll', component: EnrollComponent, canActivate: [authGuard], data: { roles: ['estudiante'] }},
   { path: 'professor/my-courses', component: MyCoursesComponent, canActivate: [authGuard], data: { roles: ['profesor'] }},

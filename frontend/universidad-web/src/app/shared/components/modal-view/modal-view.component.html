@@ -1,4 +1,7 @@
 <div class="modal-body">
+  <div class="flex mx-auto justify-center">
+    <strong>{{titleName}}</strong>
+  </div>
   @if (entityData) {
     <!-- Mostrar propiedades simples y objetos -->
     @for (key of objectKeys(entityData); track key) {

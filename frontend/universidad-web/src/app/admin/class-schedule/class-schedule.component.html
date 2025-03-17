@@ -1,0 +1,10 @@
+<app-crud-template 
+  [title]="'administrar horario clases'" 
+  [headersTable]="headersTable" 
+  [data]="classSchedules" 
+  [titleName]="'classSchedule'"
+  [crud]="true"
+  (entityCreated)="createClassSchedule($event)"
+  (entityDeleted)="deleteClassSchedule($event)"
+  (entityUpdated)="updateClassSchedule($event)"> 
+</app-crud-template>

@@ -1,1 +1,29 @@
-<p>my-courses works!</p>
+<div class="container">
+    <h2>Mis Cursos</h2>
+    <div class="card shadow">
+    @if (cursos.length > 0) {
+      <ul class="list-group">
+        @for (curso of cursos; track curso.id) {
+          <li class="list-group-item">
+            <h5>{{ curso.nombre }}</h5>
+            <p>{{ curso.descripcion }}</p>
+            <p><strong>Estudiantes inscritos:</strong> {{ curso.totalEstudiantes }}</p>
+  
+            <ul>
+              @for (horario of curso.horarios; track horario.diaSemana) {
+                <li>
+                  {{ horario.diaSemana }}: {{ horario.horaInicio }} - {{ horario.horaFin }} (Aula: {{ horario.aula }})
+                </li>
+              }
+            </ul>
+  
+
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>No tienes cursos asignados.</p>
+    }
+    </div>
+  </div>
+  

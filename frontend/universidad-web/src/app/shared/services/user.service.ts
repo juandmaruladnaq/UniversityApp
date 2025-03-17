@@ -40,7 +40,13 @@ export class UserService {
     return this.http.get<any[]>(`${this.apiUrl}/${UserId}/cursos`);
   }
 
-  registerCourse(usuarioId: number, cursoId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/inscribir`, { usuarioId, cursoId });
+  deleteEnroll(courseId: number, studentId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${courseId}/matricula/${studentId}`);
   }
+
+  updateUserProfile(userId: number, userData: any): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${userId}`, userData);
+  }
+
+
 }

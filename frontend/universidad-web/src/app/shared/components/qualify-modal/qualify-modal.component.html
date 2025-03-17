@@ -1,0 +1,48 @@
+<div class="modal-header bg-primary text-white">
+    <h4 class="modal-title">Asignar Calificación</h4>
+    <button type="button" class="btn-close" (click)="dismiss()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <form [formGroup]="calificacionForm" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="calificacionInput" class="form-label">Calificación (0-10)</label>
+        <input 
+          type="number" 
+          id="calificacionInput"
+          class="form-control"
+          formControlName="calificacion"
+          min="0"
+          max="10"
+          step="0.1"
+          required
+        >
+        
+        @if (calificacionForm.get('calificacion')?.invalid && 
+            (calificacionForm.get('calificacion')?.dirty || calificacionForm.get('calificacion')?.touched)) {
+          <div class="invalid-feedback d-block">
+            @if (calificacionForm.get('calificacion')?.errors?.['required']) {
+              <span>La calificación es requerida</span>
+            }
+            @if (calificacionForm.get('calificacion')?.errors?.['min'] ||
+                 calificacionForm.get('calificacion')?.errors?.['max']) {
+              <span>Debe ser un valor entre 0 y 10</span>
+            }
+          </div>
+        }
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="dismiss()">Cancelar</button>
+    <button 
+      type="button" 
+      class="btn btn-primary" 
+      [disabled]="calificacionForm.invalid"
+      (click)="submitCalificacion()"
+    >
+      Guardar Calificación
+    </button>
+  </div>
+  

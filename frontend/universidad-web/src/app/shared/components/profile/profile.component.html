@@ -1,0 +1,36 @@
+<div class="container profile-container">
+    <div class="card profile-card shadow-lg p-4">
+      <div class="text-center">
+        <label for="fileInput" class="profile-img-container">
+          <img [src]="previewImage" alt="Profile Image" class="profile-img">
+          <div class="overlay">
+            <i class="fas fa-camera"></i>
+          </div>
+        </label>
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
+      </div>
+  
+      <div class="profile-info">
+        <h2 class="text-center">{{ user.nombre }}</h2>
+        <p class="text-muted text-center">{{ user.email }}</p>
+      </div>
+  
+      <div *ngIf="!isEditing" class="text-center mt-3">
+        <button class="btn btn-primary" (click)="enableEdit()">Editar Perfil</button>
+      </div>
+  
+      <div *ngIf="isEditing" class="mt-4">
+        <label class="form-label">Nombre</label>
+        <input type="text" [(ngModel)]="user.nombre" class="form-control">
+  
+        <label class="form-label mt-3">Email</label>
+        <input type="email" [(ngModel)]="user.email" class="form-control" disabled>
+  
+        <div class="mt-4 d-flex justify-content-between">
+          <button class="btn btn-danger" (click)="cancelEdit()">Cancelar</button>
+          <button class="btn btn-success" (click)="saveProfile()">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

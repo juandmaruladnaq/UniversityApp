@@ -29,4 +29,24 @@ export class CourseService {
   deleteCourse(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getSchedulesByCourse(id: number): Observable<Course>{
+    return this.http.get<Course>(`${this.apiUrl}/${id}/horarios`);
+  }
+
+  registerCourse(usuarioId: number, cursoId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/inscribir`, { usuarioId, cursoId });
+  }
+
+  getCursosByProfesor(profesorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/profesor/${profesorId}`);
+  }
+
+  getEstudiantesByCurso(cursoId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${cursoId}/estudiantes`);
+  }
+
+  asignarNota(estudianteId: number, cursoId: number, calificacion: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${cursoId}/matricula/${estudianteId}/nota`, { calificacion });
+  }
 }

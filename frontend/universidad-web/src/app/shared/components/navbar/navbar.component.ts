@@ -22,5 +22,9 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 
+  iconClick(){
+    this.router.navigate(['/']);
+  }
+
 
 }

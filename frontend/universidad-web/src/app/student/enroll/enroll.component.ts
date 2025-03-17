@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import { UserService } from '../../shared/services/user.service';
 import { CourseService } from '../../shared/services/course.service';
+import { ModalViewComponent } from '../../shared/components/modal-view/modal-view.component';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {Course} from '../../shared/models/Course.model'
+
+
 
 @Component({
   selector: 'app-enroll',
-  imports: [],
+  imports: [NgbModule],
   templateUrl: './enroll.component.html',
   styleUrl: './enroll.component.css'
 })
@@ -13,8 +17,8 @@ export class EnrollComponent implements OnInit {
   cursos: any[] = [];
   usuarioId: number | null = null;
 
-  constructor(private userService: UserService, private authService: AuthService,
-    private courseService :CourseService
+  constructor( private authService: AuthService,
+    private courseService :CourseService,private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +41,7 @@ export class EnrollComponent implements OnInit {
       return;
     }
 
-    this.userService.registerCourse(this.usuarioId, cursoId).subscribe({
+    this.courseService.registerCourse(this.usuarioId, cursoId).subscribe({
       next: () => {
         alert('Te has inscrito correctamente en el curso.');
       },
@@ -46,4 +50,20 @@ export class EnrollComponent implements OnInit {
       }
     });
   }
+
+
+    openViewModal(courseId:number) {
+      const modalRef = this.modalService.open(ModalViewComponent, { centered: true, size: 'lg' });
+      modalRef.componentInstance.titleName = "Info completa";
+      this.courseService.getSchedulesByCourse(courseId).subscribe({
+        next: (course: Course) => {
+          console.log("course entrante: ", course);
+          modalRef.componentInstance.entityData = course;
+        },
+        error: (err) => {
+          console.error('Error al obtener el curso:', err);
+        }
+      });
+    }
+    
 }
